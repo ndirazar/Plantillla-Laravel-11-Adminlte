@@ -315,17 +315,20 @@ return [
             'text' => 'Buscar',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
             'text' => 'Ubicaciones',
             'url' => '/ubicaciones',
             'icon' => 'far fa-fw fa-file',
             // 'label' => 0,
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Mapas',
+            'url' => '/mapas',
+            'icon' => 'far fa-fw fa-file',
+            // 'label' => 0,
+            'label_color' => 'success',
+        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'Perfil',

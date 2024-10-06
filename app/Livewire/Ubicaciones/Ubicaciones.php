@@ -8,21 +8,30 @@ use App\Models\Ubicacion;
 
 class Ubicaciones extends AdminComponent
 {
-    public $ubicaciones;
-    public $searchRazonSocial = '';
-    public $searchDireccion = '';
+    public $searchTerm = '';
 
+    public $hola = null;
+
+    public $ubicaciones = [];
+
+    public function mount()
+    {
+        // dd('mount');
+        $this->ubicaciones = Ubicacion::orderBy('razon_social', 'asc')->get();
+    }
+
+    public function updatedsearchTerm()
+    {
+        dd('aca');
+        $this->ubicaciones = Ubicacion::where('razon_social', 'like', '%' . $this->searchTerm . '%')
+                                      ->orderBy('razon_social', 'asc')
+                                      ->get();
+    }
     public function render()
     {
-        // Consultar ubicaciones con búsqueda por razon_social y direccion
-        $this->ubicaciones = Ubicacion::query()
-            ->when($this->searchRazonSocial, function($query) {
-                $query->where('razon_social', 'like', '%' . $this->searchRazonSocial . '%');
-            })
-            ->orderBy('razon_social', 'asc')
-            ->get();
 
-        return view('livewire.ubicaciones.ubicaciones')->layout('layout.app'); // Definir el layout a usar
+        return view('livewire.ubicaciones.ubicaciones',[
+            'ubicaciones' => $this->ubicaciones])->layout('layout.app'); // Definir el layout a usar
 
     }
 }

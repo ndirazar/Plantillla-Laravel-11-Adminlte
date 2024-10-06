@@ -14,44 +14,47 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-<div>
-    <div class="card">
-        <div class="card-header bg-gradient-info">
-            <h5 class="text-white font-weight-bolder ">Habilitaciones Comerciales</h5>
-        </div>
-        <div class="row p-2 mt-2 mb-2">
-            <div class="col-md-6">
-                <input type="search" wire:model="searchRazonSocial" class="form-control" placeholder="Buscar por Razón Social">
+    <div>
+
+        <div class="card">
+            <div class="card-header bg-gradient-info">
+                <h5 class="text-white font-weight-bolder ">Habilitaciones Comerciales</h5>
             </div>
-            <div class="col-md-6">
-                <input type="search" wire:model="searchDireccion" class="form-control" placeholder="Buscar por Dirección">
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th class="text-sm">Razón Social</th>
-                        <th class="text-sm">Dirección</th>
-                        <th class="text-sm">Rubro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($ubicaciones as $ubicacion)
+
+            <x-search-input wire:model.blur="searchTerm" />
+
+            <input type="text" wire:model.live="hola">
+
+            <input type="text" wire:model.blur="hola">
+
+            <p>hhhhhhhhh {{ $hola }}</p>
+
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead>
                         <tr>
-                            <td class="text-sm">{{ $ubicacion->razon_social }}</td>
-                            <td class="text-sm">{{ $ubicacion->direccion }}</td>
-                            <td class="text-sm">{{ $ubicacion->rubro }}</td>
+                            <th class="text-sm">Razón Social</th>
+                            <th class="text-sm">Dirección</th>
+                            <th class="text-sm">Rubro</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @if($ubicaciones->isEmpty())
-                <p>No se encontraron resultados.</p>
-            @endif
+                    </thead>
+                    <tbody>
+
+                        @foreach ($ubicaciones as $ubicacion)
+                            <tr>
+                                <td class="text-sm">{{ $ubicacion->razon_social }}</td>
+                                <td class="text-sm">{{ $ubicacion->direccion }}</td>
+                                <td class="text-sm">{{ $ubicacion->rubro }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @if ($ubicaciones->isEmpty())
+                    <p>No se encontraron resultados.</p>
+                @endif
+            </div>
         </div>
     </div>
-</div>
 @stop
 
 {{-- Push extra CSS --}}
@@ -64,5 +67,11 @@
 {{-- Push extra scripts --}}
 
 @push('js')
-    <script> console.log('Ubicaciones'); </script>
+    <script>
+        const ubicaciones = @json($ubicaciones);
+
+        ubicaciones.forEach(ubicacion => {
+            console.log(ubicacion);
+        });
+    </script>
 @endpush
