@@ -22,7 +22,7 @@ class Ubicaciones extends AdminComponent
             ->orderBy('razon_social', 'asc')
             ->get();
 
-        return view('livewire.ubicaciones.ubicaciones');
+        return view('livewire.ubicaciones.ubicaciones')->layout('layout.app'); // Definir el layout a usar
 
     }
 }

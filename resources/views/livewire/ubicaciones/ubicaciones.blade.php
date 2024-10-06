@@ -1,15 +1,19 @@
-@extends('adminlte::page')
+@extends('layout.app')
 
-@section('title', 'Ubicaciones')
+{{-- Customize layout sections --}}
 
+@section('subtitle', 'Habilitaciones')
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Inicio</a></li>
         <li class="breadcrumb-item active">Ubicaciones</li>
-    </ol>
-@endsection
 
-@section('content')
+    </ol>
+@stop
+@section('content_header_subtitle', 'Welcome')
+{{-- Content body: main page content --}}
+
+@section('content_body')
 <div>
     <div class="card">
         <div class="card-header bg-gradient-info">
@@ -46,7 +50,19 @@
                 <p>No se encontraron resultados.</p>
             @endif
         </div>
-      </div>
+    </div>
 </div>
+@stop
 
-@endsection
+{{-- Push extra CSS --}}
+
+@push('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@endpush
+
+{{-- Push extra scripts --}}
+
+@push('js')
+    <script> console.log('Ubicaciones'); </script>
+@endpush
